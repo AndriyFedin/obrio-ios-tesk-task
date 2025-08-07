@@ -14,12 +14,12 @@
 		0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF1D1462D22DD44001626E7 /* AnalyticsService.swift */; };
 		1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6552D22B0F500176711 /* AppDelegate.swift */; };
 		1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6572D22B0F500176711 /* SceneDelegate.swift */; };
-		1CA3B65A2D22B0F500176711 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B6592D22B0F500176711 /* ViewController.swift */; };
 		1CA3B65D2D22B0F500176711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B65C2D22B0F500176711 /* Base */; };
 		1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B65E2D22B0F500176711 /* TransactionsTestTask.xcdatamodeld */; };
 		1CA3B6622D22B0F600176711 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B6612D22B0F600176711 /* Assets.xcassets */; };
 		1CA3B6652D22B0F600176711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B6642D22B0F600176711 /* Base */; };
 		1CA3B6702D22B0F600176711 /* TransactionsTestTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */; };
+		C20A52E02E44EC2100B490C1 /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20A52DF2E44EC1500B490C1 /* BalanceView.swift */; };
 		C2B8E12C2E43D51B00550FEF /* Transaction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8E12B2E43D50A00550FEF /* Transaction+Extensions.swift */; };
 		C2B8E12F2E43DE0400550FEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */; };
 		C2B8E1342E43E73B00550FEF /* TransactionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8E1332E43E73B00550FEF /* TransactionContentView.swift */; };
@@ -53,7 +53,6 @@
 		1CA3B6522D22B0F500176711 /* TransactionsTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransactionsTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA3B6552D22B0F500176711 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CA3B6572D22B0F500176711 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1CA3B6592D22B0F500176711 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1CA3B65C2D22B0F500176711 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CA3B65F2D22B0F500176711 /* TransactionsTestTask.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransactionsTestTask.xcdatamodel; sourceTree = "<group>"; };
 		1CA3B6612D22B0F600176711 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +61,7 @@
 		1CA3B66B2D22B0F600176711 /* TransactionsTestTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransactionsTestTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsTestTaskTests.swift; sourceTree = "<group>"; };
 		1CA3B6752D22B0F600176711 /* TransactionsTestTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransactionsTestTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C20A52DF2E44EC1500B490C1 /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
 		C2B8E12B2E43D50A00550FEF /* Transaction+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Extensions.swift"; sourceTree = "<group>"; };
 		C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C2B8E1332E43E73B00550FEF /* TransactionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionContentView.swift; sourceTree = "<group>"; };
@@ -150,7 +150,6 @@
 				0DF1D13E2D22DC2D001626E7 /* Services */,
 				1CA3B6552D22B0F500176711 /* AppDelegate.swift */,
 				1CA3B6572D22B0F500176711 /* SceneDelegate.swift */,
-				1CA3B6592D22B0F500176711 /* ViewController.swift */,
 				1CA3B65B2D22B0F500176711 /* Main.storyboard */,
 				1CA3B6612D22B0F600176711 /* Assets.xcassets */,
 				1CA3B6632D22B0F600176711 /* LaunchScreen.storyboard */,
@@ -187,6 +186,7 @@
 		C2B8E1302E43E71200550FEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C20A52DF2E44EC1500B490C1 /* BalanceView.swift */,
 				C2B8E1312E43E71800550FEF /* Cells */,
 			);
 			path = Views;
@@ -348,13 +348,13 @@
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
 				C2B8E12C2E43D51B00550FEF /* Transaction+Extensions.swift in Sources */,
 				C2B8E1342E43E73B00550FEF /* TransactionContentView.swift in Sources */,
-				1CA3B65A2D22B0F500176711 /* ViewController.swift in Sources */,
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
 				C2B8E12F2E43DE0400550FEF /* HomeViewController.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
 				C2B8E1362E43E79900550FEF /* TransactionContentConfiguration.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
+				C20A52E02E44EC2100B490C1 /* BalanceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

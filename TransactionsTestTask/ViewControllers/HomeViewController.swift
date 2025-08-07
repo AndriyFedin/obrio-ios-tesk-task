@@ -12,27 +12,55 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "My Wallet"
+        
         setupTableView()
     }
     
     // MARK: - Private
     
     private var tableView: UITableView = .init()
+    private weak var tableViewHeader: BalanceView?
     
     private var transactions: [TransactionDTO] = [
         .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
-        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC")
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
+        .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
+        .init(icon: nil, category: "Groceries", time: "Yesterday", amount: 0.002, currency: "BTC"),
     ]
     
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
+        let header = BalanceView()
+        header.frame.size.height = 200
+        tableView.tableHeaderView = header
+        
         let constraints = [
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            header.widthAnchor.constraint(equalTo: tableView.widthAnchor),
+            header.heightAnchor.constraint(equalToConstant: 200)
         ]
         NSLayoutConstraint.activate(constraints)
         

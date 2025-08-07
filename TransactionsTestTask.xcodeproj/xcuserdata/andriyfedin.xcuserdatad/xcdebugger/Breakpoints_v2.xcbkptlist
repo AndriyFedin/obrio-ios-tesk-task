@@ -3,6 +3,7 @@
    uuid = "8AEDAAE8-9D73-4A24-B246-CCF40815233C"
    type = "1"
    version = "2.0">
+<<<<<<< Updated upstream
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -89,6 +90,20 @@
                   startingLineNumber = "15"
                   endingLineNumber = "15">
                </Location>
+               <Location
+                  uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA - 6c9a584a6a979019"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TransactionsTestTask.TransactionContentView.configuration.setter : UIKit.UIContentConfiguration"
+                  moduleName = "TransactionsTestTask.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andriyfedin/Documents/Side%20projects/code/obrio-ios-tesk-task/TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -109,4 +124,6 @@
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
+=======
+>>>>>>> Stashed changes
 </Bucket>
