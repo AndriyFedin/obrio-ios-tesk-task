@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "8AEDAAE8-9D73-4A24-B246-CCF40815233C"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "configuration"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA - dd54ad3cda635028"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TransactionsTestTask.TransactionContentView.currentConfiguration.getter : Swift.Optional&lt;TransactionsTestTask.TransactionContentConfiguration&gt;"
+                  moduleName = "TransactionsTestTask.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andriyfedin/Documents/Side%20projects/code/obrio-ios-tesk-task/TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA - 1b453fa201d4dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TransactionsTestTask.TransactionContentView.currentConfiguration.setter : Swift.Optional&lt;TransactionsTestTask.TransactionContentConfiguration&gt;"
+                  moduleName = "TransactionsTestTask.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andriyfedin/Documents/Side%20projects/code/obrio-ios-tesk-task/TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA - 1f98b8d656d7e12b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TransactionsTestTask.TransactionContentView.currentConfiguration.modify : Swift.Optional&lt;TransactionsTestTask.TransactionContentConfiguration&gt;"
+                  moduleName = "TransactionsTestTask.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andriyfedin/Documents/Side%20projects/code/obrio-ios-tesk-task/TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA - a6ed386b28622866"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TransactionsTestTask.TransactionContentView.init(configuration: TransactionsTestTask.TransactionContentConfiguration) -&gt; TransactionsTestTask.TransactionContentView"
+                  moduleName = "TransactionsTestTask.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andriyfedin/Documents/Side%20projects/code/obrio-ios-tesk-task/TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15">
+               </Location>
+               <Location
+                  uuid = "E49E159E-A51C-4047-8947-56F3D1265DEA - e765ec02386341c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TransactionsTestTask.TransactionContentView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TransactionsTestTask.TransactionContentView&gt;"
+                  moduleName = "TransactionsTestTask.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andriyfedin/Documents/Side%20projects/code/obrio-ios-tesk-task/TransactionsTestTask/Views/Cells/TransactionCell/TransactionContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CA459AE9-6722-47D2-8B57-5B4F2A35CD2B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TransactionsTestTask/Views/Cells/TransactionCell/TransactionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "configure(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
