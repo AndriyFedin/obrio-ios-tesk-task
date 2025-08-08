@@ -21,6 +21,8 @@
 		1CA3B6702D22B0F600176711 /* TransactionsTestTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */; };
 		C20A52E02E44EC2100B490C1 /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20A52DF2E44EC1500B490C1 /* BalanceView.swift */; };
 		C2127DD32E45394200C5A60B /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2127DD22E45393F00C5A60B /* CurrencyView.swift */; };
+		C27D36B02E461B1500D20151 /* AddFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */; };
+		C27D36B22E46420600D20151 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D36B12E46420600D20151 /* UIView+Layout.swift */; };
 		C2B8E12C2E43D51B00550FEF /* Transaction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8E12B2E43D50A00550FEF /* Transaction+Extensions.swift */; };
 		C2B8E12F2E43DE0400550FEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */; };
 		C2B8E1342E43E73B00550FEF /* TransactionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8E1332E43E73B00550FEF /* TransactionContentView.swift */; };
@@ -64,6 +66,8 @@
 		1CA3B6752D22B0F600176711 /* TransactionsTestTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransactionsTestTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C20A52DF2E44EC1500B490C1 /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
 		C2127DD22E45393F00C5A60B /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
+		C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFundsViewController.swift; sourceTree = "<group>"; };
+		C27D36B12E46420600D20151 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		C2B8E12B2E43D50A00550FEF /* Transaction+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+Extensions.swift"; sourceTree = "<group>"; };
 		C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C2B8E1332E43E73B00550FEF /* TransactionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionContentView.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				C2B8E12B2E43D50A00550FEF /* Transaction+Extensions.swift */,
+				C27D36B12E46420600D20151 /* UIView+Layout.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 		C2B8E12D2E43DDE200550FEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */,
 				C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
@@ -363,10 +369,12 @@
 				1CA3B6562D22B0F500176711 /* AppDelegate.swift in Sources */,
 				C2B8E12F2E43DE0400550FEF /* HomeViewController.swift in Sources */,
 				1CA3B6582D22B0F500176711 /* SceneDelegate.swift in Sources */,
+				C27D36B22E46420600D20151 /* UIView+Layout.swift in Sources */,
 				C2B8E1362E43E79900550FEF /* TransactionContentConfiguration.swift in Sources */,
 				1CA3B6602D22B0F500176711 /* TransactionsTestTask.xcdatamodeld in Sources */,
 				0DF1D1402D22DC51001626E7 /* ServicesAssembler.swift in Sources */,
 				C20A52E02E44EC2100B490C1 /* BalanceView.swift in Sources */,
+				C27D36B02E461B1500D20151 /* AddFundsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

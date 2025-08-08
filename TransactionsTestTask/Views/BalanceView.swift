@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class BalanceView: UIView {
     
@@ -19,6 +20,9 @@ final class BalanceView: UIView {
         setup()
     }
     
+    var addBalanceRequested: AnyPublisher<UIView, Never> { addBalanceRequestedSubject.eraseToAnyPublisher() }
+    var addTransactionRequested: AnyPublisher<Void, Never> { addTransactionRequestedSubject.eraseToAnyPublisher() }
+    
     // MARK: - Private
     
     private let titleLabel: UILabel = .init()
@@ -27,6 +31,9 @@ final class BalanceView: UIView {
     
     private let transactionsLabel: UILabel = .init()
     private let addExpenseButton: UIButton = .init(type: .roundedRect)
+    
+    private let addBalanceRequestedSubject: PassthroughSubject<UIView, Never> = .init()
+    private let addTransactionRequestedSubject: PassthroughSubject<Void, Never> = .init()
     
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -113,10 +120,10 @@ final class BalanceView: UIView {
     }
     
     @objc private func handleTopUpButtonTap() {
-        print("Top UP here")
+        addBalanceRequestedSubject.send(topUpButton)
     }
     
     @objc private func handleAddExpenseButtonTap() {
-        print("Add Expense here")
+        addTransactionRequestedSubject.send()
     }
 }

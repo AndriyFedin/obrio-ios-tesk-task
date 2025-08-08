@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class HomeViewController: UIViewController {
     
@@ -15,12 +16,17 @@ final class HomeViewController: UIViewController {
         title = "My Wallet"
         
         setupTableView()
+        setupBindings()
     }
     
     // MARK: - Private
     
     private var tableView: UITableView = .init()
-    private weak var tableViewHeader: BalanceView?
+    private var balanceView: BalanceView? { tableView.tableHeaderView as? BalanceView }
+    
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private lazy var addFundsViewController = AddFundsViewController()
     
     private var transactions: [TransactionDTO] = [
         .init(icon: nil, category: "Taxi", time: "Today", amount: 0.001, currency: "BTC"),
@@ -70,6 +76,30 @@ final class HomeViewController: UIViewController {
         tableView.dataSource = self
     }
     
+    private func setupBindings() {
+        balanceView?.addBalanceRequested.sink { [weak self] in
+            self?.showAddFunds($0)
+        }.store(in: &cancellables)
+        
+        addFundsViewController.addfunds.sink { [weak self] in
+            print("add \($0) BTC")
+            self?.addFundsViewController.dismiss(animated: true)
+            self?.addFundsViewController.clearInput() // if success
+        }.store(in: &cancellables)
+    }
+    
+    private func showAddFunds(_ sender: UIView) {
+        addFundsViewController.preferredContentSize = .init(width: 240, height: 80)
+        addFundsViewController.modalPresentationStyle = .popover
+        
+        let addFundsPresentationController = addFundsViewController.popoverPresentationController
+        addFundsPresentationController?.permittedArrowDirections = .up
+        addFundsPresentationController?.sourceRect = sender.bounds
+        addFundsPresentationController?.sourceView = sender
+        addFundsPresentationController?.delegate = self
+        
+        present(addFundsViewController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableView related extensions
@@ -94,5 +124,19 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
+    }
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension HomeViewController: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(
+        for controller: UIPresentationController,
+        traitCollection: UITraitCollection
+    ) -> UIModalPresentationStyle {
+        // Return no adaptive presentation style,
+        // use default presentation behaviour
+        return .none
     }
 }
