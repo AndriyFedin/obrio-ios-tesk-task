@@ -37,7 +37,7 @@ final class BalanceView: UIView {
     
     private func setupSubviews() {
         titleLabel.text = "Current balance"
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)//.systemFont(ofSize: 12)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
         titleLabel.textColor = .tertiaryLabel
         titleLabel.setContentHuggingPriority(.required, for: .vertical)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -70,6 +70,10 @@ final class BalanceView: UIView {
     }
     
     private func setupLayout() {
+        let currencyView: CurrencyView = .init()
+        currencyView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(currencyView)
+        
         let vStack = UIStackView(arrangedSubviews: [titleLabel, balanceLabel, topUpButton])
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.axis = .vertical
@@ -86,7 +90,10 @@ final class BalanceView: UIView {
         addSubview(bottomContainer)
         
         let constraints = [
-            vStack.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
+            currencyView.topAnchor.constraint(equalTo: topAnchor),
+            currencyView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            
+            vStack.topAnchor.constraint(greaterThanOrEqualTo: currencyView.bottomAnchor),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor),
             vStack.bottomAnchor.constraint(lessThanOrEqualTo: bottomContainer.topAnchor, constant: -24),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor),
