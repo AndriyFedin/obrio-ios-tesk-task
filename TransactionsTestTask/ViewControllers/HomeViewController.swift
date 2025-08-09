@@ -81,6 +81,12 @@ final class HomeViewController: UIViewController {
             self?.showAddFunds($0)
         }.store(in: &cancellables)
         
+        balanceView?.addTransactionRequested.sink { [weak self] in
+            let addTransactionViewController = AddTransactionViewController()
+            let navigationController = UINavigationController.init(rootViewController: addTransactionViewController)
+            self?.present(navigationController, animated: true)
+        }.store(in: &cancellables)
+        
         addFundsViewController.addfunds.sink { [weak self] in
             print("add \($0) BTC")
             self?.addFundsViewController.dismiss(animated: true)
