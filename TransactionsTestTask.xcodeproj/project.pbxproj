@@ -34,6 +34,7 @@
 		C2C28FA62E49FAE600058415 /* BitcoinServiceMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FA52E49FAE200058415 /* BitcoinServiceMocks.swift */; };
 		C2C28FA82E49FE1D00058415 /* BitcoinRateServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FA72E49FE1C00058415 /* BitcoinRateServiceTests.swift */; };
 		C2C28FA92E4A2B5000058415 /* AnalyticsRateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FA32E49EDD000058415 /* AnalyticsRateObserver.swift */; };
+		C2C28FAB2E4A497D00058415 /* AnalyticsRateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FAA2E4A497C00058415 /* AnalyticsRateObserverTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		C2C28FA32E49EDD000058415 /* AnalyticsRateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRateObserver.swift; sourceTree = "<group>"; };
 		C2C28FA52E49FAE200058415 /* BitcoinServiceMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinServiceMocks.swift; sourceTree = "<group>"; };
 		C2C28FA72E49FE1C00058415 /* BitcoinRateServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinRateServiceTests.swift; sourceTree = "<group>"; };
+		C2C28FAA2E4A497C00058415 /* AnalyticsRateObserverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsRateObserverTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 		1CA3B66E2D22B0F600176711 /* TransactionsTestTaskTests */ = {
 			isa = PBXGroup;
 			children = (
+				C2C28FAA2E4A497C00058415 /* AnalyticsRateObserverTests.swift */,
 				C2C28FA72E49FE1C00058415 /* BitcoinRateServiceTests.swift */,
 				C2C28FA52E49FAE200058415 /* BitcoinServiceMocks.swift */,
 				1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */,
@@ -403,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2C28FAB2E4A497D00058415 /* AnalyticsRateObserverTests.swift in Sources */,
 				C2C28FA82E49FE1D00058415 /* BitcoinRateServiceTests.swift in Sources */,
 				C21A905C2E47B8DB00F25327 /* AnalyticsServiceTests.swift in Sources */,
 				C2C28FA62E49FAE600058415 /* BitcoinServiceMocks.swift in Sources */,
