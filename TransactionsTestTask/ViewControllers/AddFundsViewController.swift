@@ -74,7 +74,7 @@ final class AddFundsViewController: UIViewController {
         
         addButtonContainer.addSubview(addButton)
         NSLayoutConstraint.activate(
-            addButton.constraintsForAnchoringTo(boundsOf: addButtonContainer, withInsets: 8)
+            addButton.constraintsForAnchoringTo(boundsOf: addButtonContainer, withInset: 8)
         )
     }
 }

@@ -22,6 +22,10 @@ enum ServicesAssembler {
         shared.bitcoinRateService
     }
     
+    static var coreDataService: CoreDataService {
+        shared.coreDataService
+    }
+    
     // MARK: - Private
     
     private static let shared = Container()
@@ -30,12 +34,14 @@ enum ServicesAssembler {
 private final class Container {
     let analyticsService: AnalyticsService
     let bitcoinRateService: BitcoinRateService
+    let coreDataService: CoreDataService
     
     let analyticsRateObserver: AnalyticsRateObserver
     
     init() {
         self.analyticsService = AnalyticsServiceImpl()
         self.bitcoinRateService = BitcoinRateServiceImpl()
+        self.coreDataService = CoreDataService()
         
         self.analyticsRateObserver = AnalyticsRateObserver(
             rateService: self.bitcoinRateService,

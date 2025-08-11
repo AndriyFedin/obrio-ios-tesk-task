@@ -14,18 +14,10 @@ class TransactionCell: UITableViewCell {
         
         config.icon = transaction.icon
         config.title = transaction.category
-        config.subtitle = transaction.subtitle
-        config.value = "\(transaction.formattedAmount) \(transaction.currency)"
-        
-        switch transaction.category {
-        case "Taxi":
-            config.iconBackgroundColor = .systemBlue.withAlphaComponent(0.2)
-        case "Restaurant":
-            config.iconBackgroundColor = .systemPurple.withAlphaComponent(0.2)
-        default:
-            config.iconBackgroundColor = .systemGray4
-        }
-        config.valueColor = transaction.amount < 0 ? .systemRed : .systemGreen
+        config.subtitle = transaction.time
+        config.value = "\(transaction.amount) \(transaction.currency)"
+        config.iconBackgroundColor = transaction.backgroundColor
+        config.valueColor = transaction.valueColor
         
         self.contentConfiguration = config
     }
@@ -34,15 +26,10 @@ class TransactionCell: UITableViewCell {
 struct TransactionDTO {
     let icon: UIImage?
     let category: String
+    let type: TransactionType
     let time: String
     let amount: Double
     let currency: String
-    
-    var subtitle: String {
-        "\(category) - \(time)"
-    }
-    
-    var formattedAmount: String {
-        String(format: "%g", amount)
-    }
+    let valueColor: UIColor
+    let backgroundColor: UIColor
 }

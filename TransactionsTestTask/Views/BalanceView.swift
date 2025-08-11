@@ -26,6 +26,10 @@ final class BalanceView: UIView {
     func updateRate(_ rate: String) {
         rateView.setValue(rate)
     }
+    
+    func setBalance(_ balance: String) {
+        balanceLabel.text = balance
+    }
         
     // MARK: - Private
     

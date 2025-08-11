@@ -26,6 +26,9 @@ final class AddTransactionViewController: UIViewController {
     private let categorySubject: CurrentValueSubject<TransactionCategory, Never> = .init(.other)
     private var cancellables: Set<AnyCancellable> = []
     
+    // TODO: move this to viewModel
+    private let coreDataService = ServicesAssembler.coreDataService
+    
     private func setup() {
         title = "Add Transaction"
         view.backgroundColor = .systemBackground
@@ -61,6 +64,10 @@ final class AddTransactionViewController: UIViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.setTitle("Add", for: .normal)
         addButton.configuration = .filled()
+        addButton.addAction(UIAction { [weak self] _ in
+            guard let self else { return }
+            self.createNewTransaction()
+        }, for: .touchUpInside)
     }
     
     private func setupLayout() {
@@ -116,27 +123,21 @@ final class AddTransactionViewController: UIViewController {
             self?.categoryDropDownButton.setTitle(category.title, for: .normal)
         }.store(in: &cancellables)
     }
-}
-
-enum TransactionCategory: String, CaseIterable {
-    case groceries, taxi, electronics, restaurant, other
     
-    var imageName: String {
-        switch self {
-        case .groceries:
-            "carrot"
-        case .taxi:
-            "car.top.door.rear.right.open"
-        case .electronics:
-            "smartphone"
-        case .restaurant:
-            "fork.knife"
-        case .other:
-            "infinity"
+    private func createNewTransaction() {
+        Task {
+            do {
+                try await coreDataService.createTransaction(
+                    type: .expense,
+                    amount: Double(amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? "") ?? 0.0,
+                    category: categorySubject.value,
+                    date: .now
+                )
+            } catch {
+                print("Failed to create transaction: \(error)")
+            }
         }
     }
-    
-    var title: String {
-        rawValue.capitalized
-    }
 }
+
+

@@ -28,7 +28,7 @@ extension UIView {
     /// - Parameter view: The view to anchor to.
     /// - Parameter inset: The amount of inset around the view from all 4 sides.
     /// - Returns: The layout constraints needed for this constraint.
-    func constraintsForAnchoringTo(boundsOf view: UIView, withInsets inset: CGFloat = 0) -> [NSLayoutConstraint] {
+    func constraintsForAnchoringTo(boundsOf view: UIView, withInset inset: CGFloat = 0) -> [NSLayoutConstraint] {
         constraintsForAnchoringTo(
             boundsOf: view,
             withInsets: .init(top: inset, left: inset, bottom: inset, right: inset)
