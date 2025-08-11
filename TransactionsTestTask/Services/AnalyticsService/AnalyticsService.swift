@@ -13,10 +13,17 @@ import Foundation
 /// The service should be covered by unit tests
 protocol AnalyticsService: AnyObject {
     
-    func trackEvent(name: String, parameters: [String: String])
+    func trackEvent(name: String, parameters: [String: String], date: Date) async
+    func events(named name: String?, between startDate: Date, and endDate: Date) async -> [AnalyticsEvent]
 }
 
-final class AnalyticsServiceImpl {
+extension AnalyticsService {
+    func trackEvent(name: String, parameters: [String: String], date: Date = .now) async {
+        await trackEvent(name: name, parameters: parameters, date: date)
+    }
+}
+
+actor AnalyticsServiceImpl {
     
     private var events: [AnalyticsEvent] = []
     
@@ -29,13 +36,25 @@ final class AnalyticsServiceImpl {
 
 extension AnalyticsServiceImpl: AnalyticsService {
     
-    func trackEvent(name: String, parameters: [String: String]) {
+    func trackEvent(name: String, parameters: [String: String], date: Date) {
         let event = AnalyticsEvent(
             name: name,
             parameters: parameters,
-            date: .now
+            date: date
         )
         
         events.append(event)
+    }
+    
+    func events(named name: String?, between startDate: Date, and endDate: Date) -> [AnalyticsEvent] {
+        let dateFilteredEvents = events.filter { event in
+            event.date >= startDate && event.date <= endDate
+        }
+        
+        if let name {
+            return dateFilteredEvents.filter { $0.name == name }
+        } else {
+            return dateFilteredEvents
+        }
     }
 }

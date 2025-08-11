@@ -11,30 +11,37 @@
 /// It's ok to move the logging to model/viewModel/interactor/etc when you have 1-2 modules in your app
 /// Imagine having rate updates in 20-50 diffent modules
 /// Make this logic not depending on any module
+///
+
 enum ServicesAssembler {
+    static var analyticsService: AnalyticsService {
+        shared.analyticsService
+    }
     
-    // MARK: - BitcoinRateService
+    static var bitcoinRateService: BitcoinRateService {
+        shared.bitcoinRateService
+    }
     
-    static let bitcoinRateService: PerformOnce<BitcoinRateService> = {
-        lazy var analyticsService = Self.analyticsService()
-        
-        let service = BitcoinRateServiceImpl()
-        
-        service.onRateUpdate = {
-            analyticsService.trackEvent(
-                name: "bitcoin_rate_update",
-                parameters: ["rate": String(format: "%.2f", $0)]
-            )
-        }
-        
-        return { service }
-    }()
+    // MARK: - Private
     
-    // MARK: - AnalyticsService
+    private static let shared = Container()
+}
+
+private final class Container {
+    let analyticsService: AnalyticsService
+    let bitcoinRateService: BitcoinRateService
     
-    static let analyticsService: PerformOnce<AnalyticsService> = {
-        let service = AnalyticsServiceImpl()
+    let analyticsRateObserver: AnalyticsRateObserver
+    
+    init() {
+        self.analyticsService = AnalyticsServiceImpl()
+        self.bitcoinRateService = BitcoinRateServiceImpl()
         
-        return { service }
-    }()
+        self.analyticsRateObserver = AnalyticsRateObserver(
+            rateService: self.bitcoinRateService,
+            analyticsService: self.analyticsService
+        )
+        
+        self.bitcoinRateService.start()
+    }
 }

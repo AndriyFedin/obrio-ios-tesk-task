@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: rename this one
 final class CurrencyView: UIView {
     
     override init(frame: CGRect) {
@@ -17,6 +18,14 @@ final class CurrencyView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
+    }
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
+    
+    func setValue(_ value: String) {
+        valueLabel.text = value
     }
     
     // MARK: - Private
@@ -30,14 +39,10 @@ final class CurrencyView: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.setContentHuggingPriority(.required, for: .vertical)
         
-        titleLabel.text = "BTC to USD"
-        
         valueLabel.font = .preferredFont(forTextStyle: .callout)
         valueLabel.textColor = .label
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.setContentHuggingPriority(.required, for: .vertical)
-        
-        valueLabel.text = "117290.61"
         
         let vStack: UIStackView = .init(arrangedSubviews: [titleLabel, valueLabel])
         vStack.axis = .vertical

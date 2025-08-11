@@ -90,7 +90,15 @@ final class HomeViewController: UIViewController {
         addFundsViewController.addfunds.sink { [weak self] in
             print("add \($0) BTC")
             self?.addFundsViewController.dismiss(animated: true)
-            self?.addFundsViewController.clearInput() // if success
+            self?.addFundsViewController.clearInput() // TODO: change to clear after successful addition
+        }.store(in: &cancellables)
+        
+        // TODO: move this to view model
+        ServicesAssembler.bitcoinRateService.ratePublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] rate in
+                self?.balanceView?.updateRate(String(format: "%.2f", rate))
+                print("rate view updated to: \(rate)")
         }.store(in: &cancellables)
     }
     
@@ -141,8 +149,6 @@ extension HomeViewController: UIPopoverPresentationControllerDelegate {
         for controller: UIPresentationController,
         traitCollection: UITraitCollection
     ) -> UIModalPresentationStyle {
-        // Return no adaptive presentation style,
-        // use default presentation behaviour
-        return .none
+        return .none // Make sure it always looks like a pupup
     }
 }

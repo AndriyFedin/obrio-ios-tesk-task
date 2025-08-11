@@ -10,6 +10,9 @@ import Combine
 
 final class BalanceView: UIView {
     
+    var addBalanceRequested: AnyPublisher<UIView, Never> { addBalanceRequestedSubject.eraseToAnyPublisher() }
+    var addTransactionRequested: AnyPublisher<Void, Never> { addTransactionRequestedSubject.eraseToAnyPublisher() }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -20,9 +23,10 @@ final class BalanceView: UIView {
         setup()
     }
     
-    var addBalanceRequested: AnyPublisher<UIView, Never> { addBalanceRequestedSubject.eraseToAnyPublisher() }
-    var addTransactionRequested: AnyPublisher<Void, Never> { addTransactionRequestedSubject.eraseToAnyPublisher() }
-    
+    func updateRate(_ rate: String) {
+        rateView.setValue(rate)
+    }
+        
     // MARK: - Private
     
     private let titleLabel: UILabel = .init()
@@ -31,6 +35,8 @@ final class BalanceView: UIView {
     
     private let transactionsLabel: UILabel = .init()
     private let addExpenseButton: UIButton = .init(type: .roundedRect)
+    
+    private let rateView: CurrencyView = .init()
     
     private let addBalanceRequestedSubject: PassthroughSubject<UIView, Never> = .init()
     private let addTransactionRequestedSubject: PassthroughSubject<Void, Never> = .init()
@@ -74,12 +80,13 @@ final class BalanceView: UIView {
         addExpenseButton.setContentCompressionResistancePriority(.required, for: .vertical)
         addExpenseButton.configuration = .filled()
         addExpenseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        rateView.setTitle("BTC to USD")
+        rateView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupLayout() {
-        let currencyView: CurrencyView = .init()
-        currencyView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(currencyView)
+        addSubview(rateView)
         
         let vStack = UIStackView(arrangedSubviews: [titleLabel, balanceLabel, topUpButton])
         vStack.translatesAutoresizingMaskIntoConstraints = false
@@ -97,10 +104,10 @@ final class BalanceView: UIView {
         addSubview(bottomContainer)
         
         let constraints = [
-            currencyView.topAnchor.constraint(equalTo: topAnchor),
-            currencyView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            rateView.topAnchor.constraint(equalTo: topAnchor),
+            rateView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             
-            vStack.topAnchor.constraint(greaterThanOrEqualTo: currencyView.bottomAnchor),
+            vStack.topAnchor.constraint(greaterThanOrEqualTo: rateView.bottomAnchor),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor),
             vStack.bottomAnchor.constraint(lessThanOrEqualTo: bottomContainer.topAnchor, constant: -24),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor),
