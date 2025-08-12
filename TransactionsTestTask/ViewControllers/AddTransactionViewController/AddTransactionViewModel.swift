@@ -7,6 +7,10 @@
 
 final class AddTransactionViewModel {
     
+    init(coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
+    }
+    
     func createTransaction(amount: String, category: TransactionCategory) async throws {
         try await coreDataService.createTransaction(
             type: .expense,
@@ -18,5 +22,5 @@ final class AddTransactionViewModel {
     
     // MARK: - Private
     
-    private let coreDataService = ServicesAssembler.coreDataService
+    private let coreDataService: CoreDataService
 }

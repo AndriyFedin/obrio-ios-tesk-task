@@ -26,28 +26,48 @@ enum ServicesAssembler {
         shared.coreDataService
     }
     
+    static var homeViewModel: HomeViewModel {
+        shared.homeViewModel
+    }
+    
+    static var addFundsViewModel: AddFundsViewModel {
+        shared.addFundsViewModel
+    }
+    
+    static var addTransactionViewModel: AddTransactionViewModel {
+        shared.addTransactionViewModel
+    }
+    
     // MARK: - Private
     
     private static let shared = Container()
-}
-
-private final class Container {
-    let analyticsService: AnalyticsService
-    let bitcoinRateService: BitcoinRateService
-    let coreDataService: CoreDataService
     
-    let analyticsRateObserver: AnalyticsRateObserver
-    
-    init() {
-        self.analyticsService = AnalyticsServiceImpl()
-        self.bitcoinRateService = BitcoinRateServiceImpl()
-        self.coreDataService = CoreDataService()
+    private final class Container {
+        let analyticsService: AnalyticsService
+        let bitcoinRateService: BitcoinRateService
+        let coreDataService: CoreDataService
         
-        self.analyticsRateObserver = AnalyticsRateObserver(
-            rateService: self.bitcoinRateService,
-            analyticsService: self.analyticsService
-        )
+        let analyticsRateObserver: AnalyticsRateObserver
         
-        self.bitcoinRateService.start()
+        let homeViewModel: HomeViewModel
+        let addFundsViewModel: AddFundsViewModel
+        let addTransactionViewModel: AddTransactionViewModel
+        
+        init() {
+            self.analyticsService = AnalyticsServiceImpl()
+            self.bitcoinRateService = BitcoinRateServiceImpl()
+            self.coreDataService = CoreDataService()
+            
+            self.analyticsRateObserver = AnalyticsRateObserver(
+                rateService: self.bitcoinRateService,
+                analyticsService: self.analyticsService
+            )
+            
+            self.homeViewModel = HomeViewModel(coreDataService: coreDataService, rateService: bitcoinRateService)
+            self.addFundsViewModel = AddFundsViewModel(coreDataService: coreDataService)
+            self.addTransactionViewModel = AddTransactionViewModel(coreDataService: coreDataService)
+            
+            self.bitcoinRateService.start()
+        }
     }
 }

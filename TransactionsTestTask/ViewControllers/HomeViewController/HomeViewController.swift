@@ -11,19 +11,13 @@ import CoreData
 
 final class HomeViewController: UIViewController {
     
-//    init(viewModel: HomeViewModel) {
-//        self.viewModel = viewModel
-//        super.init(nibName: nil, bundle: nil)
-//    }
-    
-    init() {
-        self.viewModel = .init()
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        self.viewModel = .init()
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -50,8 +44,6 @@ final class HomeViewController: UIViewController {
     private let viewModel: HomeViewModel
     
     private var cancellables: Set<AnyCancellable> = []
-    
-    private lazy var addFundsViewController = AddFundsViewController(viewModel: AddFundsViewModel())
     
     private func setupSubviews() {
         setupTableView()
@@ -105,9 +97,7 @@ final class HomeViewController: UIViewController {
         
         balanceView?.addTransactionRequested
             .sink { [weak self] in
-                let addTransactionViewController = AddTransactionViewController(viewModel: AddTransactionViewModel())
-                let navigationController = UINavigationController.init(rootViewController: addTransactionViewController)
-                self?.present(navigationController, animated: true)
+                self?.viewModel.handleAddTransactionAction()
             }.store(in: &cancellables)
         
         viewModel.ratePublisher
@@ -158,16 +148,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func showAddFunds(_ sender: UIView) {
-        addFundsViewController.preferredContentSize = .init(width: 240, height: 80)
-        addFundsViewController.modalPresentationStyle = .popover
-        
-        let addFundsPresentationController = addFundsViewController.popoverPresentationController
-        addFundsPresentationController?.permittedArrowDirections = .up
-        addFundsPresentationController?.sourceRect = sender.bounds
-        addFundsPresentationController?.sourceView = sender
-        addFundsPresentationController?.delegate = self
-        
-        present(addFundsViewController, animated: true, completion: nil)
+        viewModel.handleAddFundsAction(from: sender)
     }
     
     private func performInitialFetch() {
@@ -242,14 +223,3 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - UIPopoverPresentationControllerDelegate
-
-extension HomeViewController: UIPopoverPresentationControllerDelegate {
-    
-    func adaptivePresentationStyle(
-        for controller: UIPresentationController,
-        traitCollection: UITraitCollection
-    ) -> UIModalPresentationStyle {
-        return .none // Make sure it always looks like a pupup
-    }
-}

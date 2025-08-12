@@ -7,6 +7,10 @@
 
 final class AddFundsViewModel {
     
+    init(coreDataService: CoreDataService) {
+        self.coreDataService = coreDataService
+    }
+    
     func addFunds(_ amountString: String) async throws {
         let amount = Double(amountString.replacingOccurrences(of: ",", with: ".")) ?? 0.0
         try await coreDataService.createTransaction(
@@ -19,5 +23,5 @@ final class AddFundsViewModel {
     
     // MARK: - Private
     
-    let coreDataService = ServicesAssembler.coreDataService
+    private let coreDataService: CoreDataService
 }

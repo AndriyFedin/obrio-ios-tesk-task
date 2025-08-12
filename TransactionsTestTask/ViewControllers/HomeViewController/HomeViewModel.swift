@@ -10,6 +10,11 @@ import UIKit
 import Combine
 
 final class HomeViewModel: NSObject {
+    
+    init(coreDataService: CoreDataService, rateService: BitcoinRateService) {
+        self.coreDataService = coreDataService
+        self.rateService = rateService
+    }
 
     var totalTransactionsCount: Int = 0
     var reloadPublisher: AnyPublisher<Void, Never> { reloadSubject.eraseToAnyPublisher() }
@@ -17,7 +22,7 @@ final class HomeViewModel: NSObject {
     var endUpdatesPublisher: AnyPublisher<Void, Never> { endUpdatesSubject.eraseToAnyPublisher() }
     var insertRowPublisher: AnyPublisher<IndexPath, Never> { insertRowSubject.eraseToAnyPublisher() }
     var insertSectionPublisher: AnyPublisher<Int, Never> { insertSectionSubject.eraseToAnyPublisher() }
-    var ratePublisher: AnyPublisher<Double, Never> { ServicesAssembler.bitcoinRateService.ratePublisher }
+    var ratePublisher: AnyPublisher<Double, Never> { rateService.ratePublisher }
     
     var displayingObjectsCount: Int {
         fetchedResultsController.fetchedObjects?.count ?? 0
@@ -80,6 +85,18 @@ final class HomeViewModel: NSObject {
         loadNextPage()
     }
     
+    func handleAddFundsAction(from sender: UIView) {
+        router?.showAddFunds(from: sender)
+    }
+    
+    func handleAddTransactionAction() {
+        router?.showAddTransaction()
+    }
+    
+    func setRouter(_ router: MainRouter) {
+        self.router = router
+    }
+    
     // MARK: - Private
     
     private let pageSize = 20
@@ -92,7 +109,10 @@ final class HomeViewModel: NSObject {
     private let insertRowSubject: PassthroughSubject<IndexPath, Never> = .init()
     private let insertSectionSubject: PassthroughSubject<Int, Never> = .init()
     
-    private var coreDataService: CoreDataService = ServicesAssembler.coreDataService
+    private let rateService: BitcoinRateService
+    private let coreDataService: CoreDataService
+    private weak var router: MainRouter?
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let controller = coreDataService.transactionsFetchedResultsController(fetchLimit: pageSize)
         controller.delegate = self
