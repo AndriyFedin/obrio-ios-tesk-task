@@ -105,7 +105,7 @@ final class HomeViewController: UIViewController {
         
         balanceView?.addTransactionRequested
             .sink { [weak self] in
-                let addTransactionViewController = AddTransactionViewController()
+                let addTransactionViewController = AddTransactionViewController(viewModel: AddTransactionViewModel())
                 let navigationController = UINavigationController.init(rootViewController: addTransactionViewController)
                 self?.present(navigationController, animated: true)
             }.store(in: &cancellables)

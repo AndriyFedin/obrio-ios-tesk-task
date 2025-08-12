@@ -10,9 +10,23 @@ import Combine
 
 final class AddTransactionViewController: UIViewController {
     
+    init(viewModel: AddTransactionViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        amountTextField.becomeFirstResponder()
     }
     
     // MARK: - Private
@@ -23,11 +37,10 @@ final class AddTransactionViewController: UIViewController {
     private let categoryDropDownButton: UIButton = .init()
     private let addButton: UIButton = .init()
     
+    private let viewModel: AddTransactionViewModel
+    
     private let categorySubject: CurrentValueSubject<TransactionCategory, Never> = .init(.other)
     private var cancellables: Set<AnyCancellable> = []
-    
-    // TODO: move this to viewModel
-    private let coreDataService = ServicesAssembler.coreDataService
     
     private func setup() {
         title = "Add Transaction"
@@ -125,14 +138,10 @@ final class AddTransactionViewController: UIViewController {
     }
     
     private func createNewTransaction() {
+        guard let amount = amountTextField.text else { return }
         Task {
             do {
-                try await coreDataService.createTransaction(
-                    type: .expense,
-                    amount: Double(amountTextField.text?.replacingOccurrences(of: ",", with: ".") ?? "") ?? 0.0,
-                    category: categorySubject.value,
-                    date: .now
-                )
+                try await viewModel.createTransaction(amount: amount, category: categorySubject.value)
                 dismiss(animated: true)
             } catch {
                 print("Failed to create transaction: \(error)")
