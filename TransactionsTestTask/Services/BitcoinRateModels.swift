@@ -7,12 +7,6 @@
 
 import Foundation
 
-// TODO: move this out
-struct TickerResponse: Decodable {
-    let symbol: String
-    let price: String
-}
-
 protocol RateCache {
     func save(rate: Double)
     func load() -> Double?

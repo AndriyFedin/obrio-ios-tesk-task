@@ -22,7 +22,7 @@ final class BitcoinRateServiceImpl {
     }
     
     init(
-        updateInterval: TimeInterval = 15.0, // Default to 15 seconds // TODO: change to minutes
+        updateInterval: TimeInterval = 60.0,
         session: URLSession = .shared,
         cache: RateCache = UserDefaultsRateCache(),
         url: URL = URL(string: "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT")!
@@ -76,6 +76,11 @@ final class BitcoinRateServiceImpl {
                 rateUpdateSubject.send(cachedRate)
             }
         }
+    }
+    
+    private struct TickerResponse: Decodable {
+        let symbol: String
+        let price: String
     }
 }
 

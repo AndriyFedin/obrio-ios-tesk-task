@@ -19,7 +19,7 @@
 		1CA3B6652D22B0F600176711 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1CA3B6642D22B0F600176711 /* Base */; };
 		1CA3B6702D22B0F600176711 /* TransactionsTestTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */; };
 		C20A52E02E44EC2100B490C1 /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20A52DF2E44EC1500B490C1 /* BalanceView.swift */; };
-		C2127DD32E45394200C5A60B /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2127DD22E45393F00C5A60B /* CurrencyView.swift */; };
+		C2127DD32E45394200C5A60B /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2127DD22E45393F00C5A60B /* RateView.swift */; };
 		C21A905C2E47B8DB00F25327 /* AnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A905B2E47B8DB00F25327 /* AnalyticsServiceTests.swift */; };
 		C21A905E2E47D07700F25327 /* BitcoinRateModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21A905D2E47D07200F25327 /* BitcoinRateModels.swift */; };
 		C27D36B02E461B1500D20151 /* AddFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */; };
@@ -78,7 +78,7 @@
 		1CA3B66F2D22B0F600176711 /* TransactionsTestTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsTestTaskTests.swift; sourceTree = "<group>"; };
 		1CA3B6752D22B0F600176711 /* TransactionsTestTaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TransactionsTestTaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C20A52DF2E44EC1500B490C1 /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
-		C2127DD22E45393F00C5A60B /* CurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyView.swift; sourceTree = "<group>"; };
+		C2127DD22E45393F00C5A60B /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		C21A905B2E47B8DB00F25327 /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		C21A905D2E47D07200F25327 /* BitcoinRateModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinRateModels.swift; sourceTree = "<group>"; };
 		C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFundsViewController.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		C2127DD12E45393100C5A60B /* CurrencyView */ = {
 			isa = PBXGroup;
 			children = (
-				C2127DD22E45393F00C5A60B /* CurrencyView.swift */,
+				C2127DD22E45393F00C5A60B /* RateView.swift */,
 			);
 			path = CurrencyView;
 			sourceTree = "<group>";
@@ -442,7 +442,7 @@
 				C2C28FA92E4A2B5000058415 /* AnalyticsRateObserver.swift in Sources */,
 				C2C28FC02E4ADE9C00058415 /* MainRouter.swift in Sources */,
 				C2B8E1382E43E83000550FEF /* TransactionCell.swift in Sources */,
-				C2127DD32E45394200C5A60B /* CurrencyView.swift in Sources */,
+				C2127DD32E45394200C5A60B /* RateView.swift in Sources */,
 				C2C28FB72E4AAAD100058415 /* HomeViewModel.swift in Sources */,
 				C2C28FBD2E4AC2B300058415 /* AddTransactionViewModel.swift in Sources */,
 				0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */,

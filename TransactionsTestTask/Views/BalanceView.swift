@@ -40,7 +40,7 @@ final class BalanceView: UIView {
     private let transactionsLabel: UILabel = .init()
     private let addExpenseButton: UIButton = .init(type: .roundedRect)
     
-    private let rateView: CurrencyView = .init()
+    private let rateView: RateView = .init()
     
     private let addBalanceRequestedSubject: PassthroughSubject<UIView, Never> = .init()
     private let addTransactionRequestedSubject: PassthroughSubject<Void, Never> = .init()

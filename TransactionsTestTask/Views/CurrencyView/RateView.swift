@@ -7,8 +7,7 @@
 
 import UIKit
 
-// TODO: rename this one
-final class CurrencyView: UIView {
+final class RateView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
