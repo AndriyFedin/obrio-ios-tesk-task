@@ -39,6 +39,8 @@
 		C2C28FAF2E4A8ABA00058415 /* HomeEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FAE2E4A8AB100058415 /* HomeEmptyView.swift */; };
 		C2C28FB22E4AA89A00058415 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FB12E4AA89A00058415 /* TransactionType.swift */; };
 		C2C28FB42E4AA8AF00058415 /* TransactionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FB32E4AA8AF00058415 /* TransactionCategory.swift */; };
+		C2C28FB72E4AAAD100058415 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FB62E4AAACD00058415 /* HomeViewModel.swift */; };
+		C2C28FBA2E4AAF1700058415 /* AddFundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FB92E4AAF1300058415 /* AddFundsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		C2C28FAE2E4A8AB100058415 /* HomeEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyView.swift; sourceTree = "<group>"; };
 		C2C28FB12E4AA89A00058415 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		C2C28FB32E4AA8AF00058415 /* TransactionCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCategory.swift; sourceTree = "<group>"; };
+		C2C28FB62E4AAACD00058415 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		C2C28FB92E4AAF1300058415 /* AddFundsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFundsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,9 +227,9 @@
 		C2B8E12D2E43DDE200550FEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C2C28FB82E4AAEF700058415 /* AddFundsViewController */,
+				C2C28FB52E4AAABD00058415 /* HomeViewController */,
 				C27D36B32E4649A300D20151 /* AddTransactionViewController.swift */,
-				C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */,
-				C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -266,6 +270,24 @@
 				C2C28FB12E4AA89A00058415 /* TransactionType.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C2C28FB52E4AAABD00058415 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C2C28FB62E4AAACD00058415 /* HomeViewModel.swift */,
+				C2B8E12E2E43DDEB00550FEF /* HomeViewController.swift */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		C2C28FB82E4AAEF700058415 /* AddFundsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C2C28FB92E4AAF1300058415 /* AddFundsViewModel.swift */,
+				C27D36AF2E461B0900D20151 /* AddFundsViewController.swift */,
+			);
+			path = AddFundsViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,11 +424,13 @@
 				C2C28FA92E4A2B5000058415 /* AnalyticsRateObserver.swift in Sources */,
 				C2B8E1382E43E83000550FEF /* TransactionCell.swift in Sources */,
 				C2127DD32E45394200C5A60B /* CurrencyView.swift in Sources */,
+				C2C28FB72E4AAAD100058415 /* HomeViewModel.swift in Sources */,
 				0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */,
 				C2C28FB22E4AA89A00058415 /* TransactionType.swift in Sources */,
 				0DF1D1432D22DCD8001626E7 /* PerformOnce.swift in Sources */,
 				0DF1D1452D22DD06001626E7 /* BitcoinRateService.swift in Sources */,
 				0DF1D1472D22DD4A001626E7 /* AnalyticsService.swift in Sources */,
+				C2C28FBA2E4AAF1700058415 /* AddFundsViewModel.swift in Sources */,
 				C2C28FB42E4AA8AF00058415 /* TransactionCategory.swift in Sources */,
 				C2C28FAD2E4A63A500058415 /* CoreDataService.swift in Sources */,
 				C2B8E12C2E43D51B00550FEF /* Transaction+Extensions.swift in Sources */,

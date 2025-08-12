@@ -10,8 +10,13 @@ import Combine
 
 final class AddFundsViewController: UIViewController {
     
-    var addfunds: AnyPublisher<String, Never> {
-        addFundsSubject.eraseToAnyPublisher()
+    init(viewModel: AddFundsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -33,8 +38,8 @@ final class AddFundsViewController: UIViewController {
     private let textField: UITextField = .init()
     private let addButton: UIButton = .init(type: .system)
     private let addButtonContainer: UIView = .init()
-    
-    private let addFundsSubject: PassthroughSubject<String, Never> = .init()
+        
+    private let viewModel: AddFundsViewModel
     
     private func setup() {
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -58,8 +63,7 @@ final class AddFundsViewController: UIViewController {
         addButton.setTitle("Add", for: .normal)
         addButton.configuration = .filled()
         addButton.addAction(UIAction { [weak self] _ in
-            guard let self else { return }
-            self.addFundsSubject.send(self.textField.text ?? "")
+            self?.handleAddFundsTap()
         }, for: .touchUpInside)
         
         addButtonContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +80,20 @@ final class AddFundsViewController: UIViewController {
         NSLayoutConstraint.activate(
             addButton.constraintsForAnchoringTo(boundsOf: addButtonContainer, withInset: 8)
         )
+    }
+    
+    private func handleAddFundsTap() {
+        guard let fundsString = textField.text else { return }
+        Task {
+            do {
+                try await viewModel.addFunds(fundsString)
+                clearInput()
+                dismiss(animated: true)
+            } catch {
+                print(error)
+                assertionFailure()
+            }
+        }
     }
 }
 

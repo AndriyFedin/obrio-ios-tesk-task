@@ -133,6 +133,7 @@ final class AddTransactionViewController: UIViewController {
                     category: categorySubject.value,
                     date: .now
                 )
+                dismiss(animated: true)
             } catch {
                 print("Failed to create transaction: \(error)")
             }
