@@ -42,6 +42,7 @@
 		C2C28FBA2E4AAF1700058415 /* AddFundsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FB92E4AAF1300058415 /* AddFundsViewModel.swift */; };
 		C2C28FBD2E4AC2B300058415 /* AddTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FBC2E4AC2AC00058415 /* AddTransactionViewModel.swift */; };
 		C2C28FC02E4ADE9C00058415 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FBF2E4ADE9C00058415 /* MainRouter.swift */; };
+		C2C28FC32E4AE11500058415 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C28FC22E4AE10E00058415 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		C2C28FB92E4AAF1300058415 /* AddFundsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFundsViewModel.swift; sourceTree = "<group>"; };
 		C2C28FBC2E4AC2AC00058415 /* AddTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionViewModel.swift; sourceTree = "<group>"; };
 		C2C28FBF2E4ADE9C00058415 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		C2C28FC22E4AE10E00058415 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 		1CA3B6542D22B0F500176711 /* TransactionsTestTask */ = {
 			isa = PBXGroup;
 			children = (
+				C2C28FC12E4AE10400058415 /* Constants */,
 				C2C28FBE2E4ADE8B00058415 /* Navigation */,
 				C2C28FB02E4AA88E00058415 /* Models */,
 				C2B8E1302E43E71200550FEF /* Views */,
@@ -307,6 +310,14 @@
 				C2C28FBF2E4ADE9C00058415 /* MainRouter.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		C2C28FC12E4AE10400058415 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C2C28FC22E4AE10E00058415 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,6 +455,7 @@
 				C2B8E1382E43E83000550FEF /* TransactionCell.swift in Sources */,
 				C2127DD32E45394200C5A60B /* RateView.swift in Sources */,
 				C2C28FB72E4AAAD100058415 /* HomeViewModel.swift in Sources */,
+				C2C28FC32E4AE11500058415 /* Constants.swift in Sources */,
 				C2C28FBD2E4AC2B300058415 /* AddTransactionViewModel.swift in Sources */,
 				0D1540612D22EF5D00D6D63F /* AnalyticsEvent.swift in Sources */,
 				C2C28FB22E4AA89A00058415 /* TransactionType.swift in Sources */,

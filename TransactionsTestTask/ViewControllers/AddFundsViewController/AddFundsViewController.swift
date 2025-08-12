@@ -73,12 +73,20 @@ final class AddFundsViewController: UIViewController {
     private func setupLayout() {
         view.addSubview(textField)
         NSLayoutConstraint.activate(
-            textField.constraintsForAnchoringTo(boundsOf: view, withInsets: .init(top: 30, left: 16, bottom: 16, right: 16))
+            textField.constraintsForAnchoringTo(
+                boundsOf: view,
+                withInsets: .init(
+                    top: 30,
+                    left: Constants.UI.mediumSpacing,
+                    bottom: Constants.UI.mediumSpacing,
+                    right: Constants.UI.mediumSpacing
+                )
+            )
         )
         
         addButtonContainer.addSubview(addButton)
         NSLayoutConstraint.activate(
-            addButton.constraintsForAnchoringTo(boundsOf: addButtonContainer, withInset: 8)
+            addButton.constraintsForAnchoringTo(boundsOf: addButtonContainer, withInset: Constants.UI.spacing)
         )
     }
     

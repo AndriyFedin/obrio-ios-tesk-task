@@ -97,7 +97,7 @@ final class BalanceView: UIView {
         vStack.axis = .vertical
         vStack.alignment = .center
         
-        vStack.spacing = 8
+        vStack.spacing = Constants.UI.spacing
         
         addSubview(vStack)
         
@@ -109,11 +109,14 @@ final class BalanceView: UIView {
         
         let constraints = [
             rateView.topAnchor.constraint(equalTo: topAnchor),
-            rateView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            rateView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.UI.spacing),
             
             vStack.topAnchor.constraint(greaterThanOrEqualTo: rateView.bottomAnchor),
             vStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            vStack.bottomAnchor.constraint(lessThanOrEqualTo: bottomContainer.topAnchor, constant: -24),
+            vStack.bottomAnchor.constraint(
+                lessThanOrEqualTo: bottomContainer.topAnchor,
+                constant: -Constants.UI.spacing * 3
+            ),
             vStack.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             transactionsLabel.leadingAnchor.constraint(equalTo: bottomContainer.leadingAnchor),
@@ -123,9 +126,9 @@ final class BalanceView: UIView {
             addExpenseButton.topAnchor.constraint(equalTo: bottomContainer.topAnchor),
             addExpenseButton.bottomAnchor.constraint(equalTo: bottomContainer.bottomAnchor),
             
-            bottomContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            bottomContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.UI.spacing),
             bottomContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
-            bottomContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            bottomContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.UI.spacing)
         ]
         NSLayoutConstraint.activate(constraints)
     }

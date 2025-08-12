@@ -56,7 +56,7 @@ final class HomeEmptyView: UIView {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.axis = .vertical
         vStack.distribution = .fill
-        vStack.spacing = 16.0
+        vStack.spacing = Constants.UI.mediumSpacing
         vStack.alignment = .center
         
         addSubview(vStack)

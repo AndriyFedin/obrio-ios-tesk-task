@@ -91,31 +91,31 @@ final class AddTransactionViewController: UIViewController {
         [amountStack, categoryStack, mainStack].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.axis = .vertical
-            $0.spacing = 8.0
+            $0.spacing = Constants.UI.spacing
             $0.alignment = .leading
             $0.distribution = .equalSpacing
         }
-        mainStack.spacing = 24.0
+        mainStack.spacing = Constants.UI.largeSpacing
         
         view.addSubview(mainStack)
         view.addSubview(addButton)
         
         NSLayoutConstraint.activate([
-            amountTextField.heightAnchor.constraint(equalToConstant: 48.0),
+            amountTextField.heightAnchor.constraint(equalToConstant: Constants.UI.extraLargeSpacing),
             amountTextField.widthAnchor.constraint(equalTo: mainStack.widthAnchor),
             
-            categoryDropDownButton.heightAnchor.constraint(equalToConstant: 48.0),
+            categoryDropDownButton.heightAnchor.constraint(equalToConstant: Constants.UI.extraLargeSpacing),
             categoryDropDownButton.widthAnchor.constraint(equalTo: mainStack.widthAnchor),
             
             mainStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
-            mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
+            mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.UI.mediumSpacing),
+            mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.UI.mediumSpacing),
             
-            addButton.heightAnchor.constraint(equalToConstant: 48.0),
+            addButton.heightAnchor.constraint(equalToConstant: Constants.UI.extraLargeSpacing),
             
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
-            addButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -16.0),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0)
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.UI.mediumSpacing),
+            addButton.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -Constants.UI.mediumSpacing),
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.UI.mediumSpacing)
         ])
     }
     

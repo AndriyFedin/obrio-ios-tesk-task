@@ -45,7 +45,7 @@ final class TransactionContentView: UIView, UIContentView {
         let mainStackView = UIStackView(arrangedSubviews: [iconImageView, textStackView, valueLabel])
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .horizontal
-        mainStackView.spacing = 16
+        mainStackView.spacing = Constants.UI.mediumSpacing
         mainStackView.alignment = .center
         addSubview(mainStackView)
 
