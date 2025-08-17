@@ -9,77 +9,70 @@ import CoreData
 import UIKit
 import Combine
 
-final class HomeViewModel: NSObject {
+final class HomeViewModel {
     
-    init(coreDataService: CoreDataService, rateService: BitcoinRateService) {
-        self.coreDataService = coreDataService
+    enum HomeDataUpdate: Equatable {
+        case reload
+        case beginUpdates
+        case endUpdates
+        case insertRow(at: IndexPath)
+        case insertSection(at: Int)
+    }
+    
+    init(dataSource: TransactionDataSource, rateService: BitcoinRateService) {
+        self.dataSource = dataSource
         self.rateService = rateService
+        setupSubscriptions()
     }
 
-    var totalTransactionsCount: Int = 0
-    var reloadPublisher: AnyPublisher<Void, Never> { reloadSubject.eraseToAnyPublisher() }
-    var beginUpdatesPublisher: AnyPublisher<Void, Never> { beginUpdatesSubject.eraseToAnyPublisher() }
-    var endUpdatesPublisher: AnyPublisher<Void, Never> { endUpdatesSubject.eraseToAnyPublisher() }
-    var insertRowPublisher: AnyPublisher<IndexPath, Never> { insertRowSubject.eraseToAnyPublisher() }
-    var insertSectionPublisher: AnyPublisher<Int, Never> { insertSectionSubject.eraseToAnyPublisher() }
     var ratePublisher: AnyPublisher<Double, Never> { rateService.ratePublisher }
+    var dataUpdatedPublisher: AnyPublisher<HomeDataUpdate, Never> { dataUpdateSubject.eraseToAnyPublisher() }
     
     var displayingObjectsCount: Int {
-        fetchedResultsController.fetchedObjects?.count ?? 0
+        dataSource.displayingObjectsCount
     }
     
     func sectionCount() -> Int {
-        fetchedResultsController.sections?.count ?? 0
+        dataSource.numberOfSections()
     }
     
     func rowCount(in section: Int) -> Int {
-        fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        dataSource.numberOfObjects(in: section)
     }
     
     func transactionDTO(at indexPath: IndexPath) -> TransactionDTO {
-        let transaction = fetchedResultsController.object(at: indexPath)
+        let transaction = dataSource.object(at: indexPath)
         return makeTransactionDTO(from: transaction)
     }
     
     func addDemoData() {
         Task {
-            await self.coreDataService.addDemoData()
+            await self.dataSource.addDemoData()
         }
     }
     
     func fetchData() {
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            assertionFailure()
+        dataSource.performFetch()
+        Task {
+            await refreshTotalTransactionsCount()
         }
     }
     
     func calculateBalance() async -> Double {
         do {
-            return try await coreDataService.calculateBalance()
+            return try await dataSource.calculateBalance()
         } catch {
             print("Failed to calculate balance: \(error)")
             return 0
         }
     }
     
-    func refreshTotalTransactionsCount() async {
-        totalTransactions = (try? await coreDataService.totalTransactionCount()) ?? 0
-    }
-    
     func nameForSection(at index: Int) -> String? {
-        guard let sectionInfo = fetchedResultsController.sections?[index] else {
-            return nil
-        }
-        
-        return format(dateString: sectionInfo.name)
+        dataSource.nameForSection(at: index).map { format(dateString: $0) }
     }
     
     func loadMoreIfNeeded() {
-        guard !isLoadingMore,
-              let fetchedCount = fetchedResultsController.fetchedObjects?.count,
-              fetchedCount < totalTransactions else {
+        guard !isLoadingMore, displayingObjectsCount < totalTransactions else {
             return
         }
         loadNextPage()
@@ -99,25 +92,27 @@ final class HomeViewModel: NSObject {
     
     // MARK: - Private
     
-    private let pageSize = 20
     private var isLoadingMore = false
     private var totalTransactions = 0
     
-    private let reloadSubject: PassthroughSubject<Void, Never> = .init()
-    private let beginUpdatesSubject: PassthroughSubject<Void, Never> = .init()
-    private let endUpdatesSubject: PassthroughSubject<Void, Never> = .init()
-    private let insertRowSubject: PassthroughSubject<IndexPath, Never> = .init()
-    private let insertSectionSubject: PassthroughSubject<Int, Never> = .init()
+    private let dataUpdateSubject: PassthroughSubject<HomeDataUpdate, Never> = .init()
+    
+    private var cancellable: AnyCancellable?
     
     private let rateService: BitcoinRateService
-    private let coreDataService: CoreDataService
+    private let dataSource: TransactionDataSource
     private weak var router: MainRouter?
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
-        let controller = coreDataService.transactionsFetchedResultsController(fetchLimit: pageSize)
-        controller.delegate = self
-        return controller
-    }()
+    private func setupSubscriptions() {
+        cancellable = dataSource.contentUpdatePublisher
+            .map { $0.homeDataUpdate }
+            .sink { [weak self] update in
+                Task {
+                    await self?.handleDataUpdate(update)
+                    self?.dataUpdateSubject.send(update)
+                }
+            }
+    }
     
     private func transactionDateString(from date: Date) -> String {
         let formatter = DateFormatter()
@@ -182,55 +177,36 @@ final class HomeViewModel: NSObject {
     private func loadNextPage() {
         isLoadingMore = true
         
-        let currentCount = fetchedResultsController.fetchedObjects?.count ?? 0
-        let newLimit = currentCount + pageSize
-        
-        let fetchRequest = fetchedResultsController.fetchRequest
-        fetchRequest.fetchLimit = newLimit
-        
-        do {
-            print("Loading next page: \(newLimit)")
-            try fetchedResultsController.performFetch()
-            reloadSubject.send()
-        } catch {
-            print("Failed to fetch next page: \(error)")
-        }
+        dataSource.loadNextPage()
+        dataUpdateSubject.send(.reload)
         
         isLoadingMore = false
     }
+    
+    private func refreshTotalTransactionsCount() async {
+        totalTransactions = (try? await dataSource.totalTransactionCount()) ?? 0
+    }
+    
+    private func handleDataUpdate(_ update: HomeDataUpdate) async {
+        if update == .endUpdates {
+            await refreshTotalTransactionsCount()
+        }
+    }
 }
 
-// MARK: - NSFetchedResultsControllerDelegate
-
-extension HomeViewModel: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        beginUpdatesSubject.send()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            if let newIndexPath = newIndexPath {
-                insertRowSubject.send(newIndexPath)
-            }
-        default:
-            reloadSubject.send()
-        }
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-        case .insert:
-            insertSectionSubject.send(sectionIndex)
-        default:
-            break
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        Task {
-            await refreshTotalTransactionsCount()
-            endUpdatesSubject.send()
+private extension TransactionDataSourceUpdate {
+    var homeDataUpdate: HomeViewModel.HomeDataUpdate {
+        switch self {
+        case .reload:
+            .reload
+        case .beginUpdates:
+            .beginUpdates
+        case .endUpdates:
+            .endUpdates
+        case let .insertRow(row):
+            .insertRow(at: row)
+        case let .insertSection(section):
+            .insertSection(at: section)
         }
     }
 }

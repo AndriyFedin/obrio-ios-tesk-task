@@ -4,6 +4,7 @@
 //
 //
 
+// TODO:
 /// Services Assembler is used for Dependency Injection
 /// There is an example of a _bad_ services relationship built on `onRateUpdate` callback
 /// This kind of relationship must be refactored with a more convenient and reliable approach
@@ -63,9 +64,9 @@ enum ServicesAssembler {
                 analyticsService: self.analyticsService
             )
             
-            self.homeViewModel = HomeViewModel(coreDataService: coreDataService, rateService: bitcoinRateService)
-            self.addFundsViewModel = AddFundsViewModel(coreDataService: coreDataService)
-            self.addTransactionViewModel = AddTransactionViewModel(coreDataService: coreDataService)
+            self.homeViewModel = HomeViewModel(dataSource: coreDataService, rateService: bitcoinRateService)
+            self.addFundsViewModel = AddFundsViewModel(transactionCreator: coreDataService)
+            self.addTransactionViewModel = AddTransactionViewModel(transactionCreator: coreDataService)
             
             self.bitcoinRateService.start()
         }

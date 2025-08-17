@@ -93,58 +93,34 @@ final class HomeViewController: UIViewController {
         balanceView?.addBalanceRequested
             .sink { [weak self] in
                 self?.showAddFunds($0)
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
         balanceView?.addTransactionRequested
             .sink { [weak self] in
                 self?.viewModel.handleAddTransactionAction()
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
         viewModel.ratePublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rate in
                 self?.balanceView?.updateRate(String(format: "%.2f", rate))
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
         emptyView.actionHandler
             .sink { [weak viewModel] in
                 viewModel?.addDemoData()
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
         
-        viewModel.reloadPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak tableView] in
-                tableView?.reloadData()
-            }.store(in: &cancellables)
-        
-        viewModel.beginUpdatesPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak tableView] in
-                tableView?.beginUpdates()
-            }.store(in: &cancellables)
-        
-        viewModel.endUpdatesPublisher
+        viewModel.dataUpdatedPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                guard let self else { return }
-                self.tableView.endUpdates()
-                self.updateEmptyViewVisibility()
-                Task {
-                    await self.updateBalanceLabel()
-                }
-            }.store(in: &cancellables)
-        
-        viewModel.insertRowPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak tableView] indexPath in
-                tableView?.insertRows(at: [indexPath], with: .automatic)
-            }.store(in: &cancellables)
-        
-        viewModel.insertSectionPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak tableView] section in
-                tableView?.insertSections(IndexSet(integer: section), with: .automatic)
-            }.store(in: &cancellables)
+                self?.handleDataChange($0)
+            }
+            .store(in: &cancellables)
     }
     
     private func showAddFunds(_ sender: UIView) {
@@ -153,9 +129,7 @@ final class HomeViewController: UIViewController {
     
     private func performInitialFetch() {
         viewModel.fetchData()
-        tableView.reloadData()
         updateEmptyViewVisibility()
-        refreshTotalTransactionsCount()
     }
     
     private func updateBalanceLabel() async {
@@ -169,9 +143,22 @@ final class HomeViewController: UIViewController {
         emptyView.isHidden = viewModel.displayingObjectsCount != 0
     }
     
-    private func refreshTotalTransactionsCount() {
-        Task {
-            await viewModel.refreshTotalTransactionsCount()
+    private func handleDataChange(_ change: HomeViewModel.HomeDataUpdate) {
+        switch change {
+        case .reload:
+            tableView.reloadData()
+        case .beginUpdates:
+            tableView.beginUpdates()
+        case .endUpdates:
+            tableView.endUpdates()
+            updateEmptyViewVisibility()
+            Task {
+                await self.updateBalanceLabel()
+            }
+        case let .insertRow(indexPath):
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        case let .insertSection(section):
+            tableView.insertSections(IndexSet(integer: section), with: .automatic)
         }
     }
 }
@@ -208,7 +195,6 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

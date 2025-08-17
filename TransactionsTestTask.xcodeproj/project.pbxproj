@@ -142,13 +142,13 @@
 		0DF1D13E2D22DC2D001626E7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0DF1D1412D22DCC3001626E7 /* Helpers */,
+				0D15405F2D22EF3400D6D63F /* AnalyticsService */,
 				C2C28FAC2E4A63A200058415 /* CoreDataService.swift */,
 				C2C28FA32E49EDD000058415 /* AnalyticsRateObserver.swift */,
 				C21A905D2E47D07200F25327 /* BitcoinRateModels.swift */,
-				0DF1D1412D22DCC3001626E7 /* Helpers */,
 				0DF1D13F2D22DC4B001626E7 /* ServicesAssembler.swift */,
 				0DF1D1442D22DCFF001626E7 /* BitcoinRateService.swift */,
-				0D15405F2D22EF3400D6D63F /* AnalyticsService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
